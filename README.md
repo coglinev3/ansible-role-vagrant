@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.com/coglinev3/ansible-role-vagrant.svg?branch=master)](https://travis-ci.com/coglinev3/ansible-role-vagrant) ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/coglinev3/ansible-role-vagrant) [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://raw.githubusercontent.com/coglinev3/ansible-role-vagrant/master/LICENSE)
 
-This Ansible role installs HashiCorp Vagrant on these supported Linux distributions:
+This Ansible role installs HashiCorp [Vagrant](https://www.vagrantup.com/intro "Introduction to Vagrant") on these supported Linux distributions:
 
 * Debian 8 (Jessie),
 * Debian 9 (Stretch),
