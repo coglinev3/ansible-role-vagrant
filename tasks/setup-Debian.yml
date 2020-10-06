@@ -1,0 +1,44 @@
+---
+# file: roles/vagrant/tasks/setup-Debian.yml
+
+- name: "Debian: Install dependencies"
+  become: "yes"
+  apt:
+    name: "{{ vagrant_dependencies }}"
+    state: present
+    update_cache: "yes"
+
+- name: "Debian: Set release for apt repository"
+  set_fact:
+    debian_ubuntu_release: "{{ ansible_distribution_release }}"
+  when: ansible_distribution != "Linux Mint"
+
+- block:
+  - name: "Linux Mint: Get distribution release"
+    command: grep -oP 'UBUNTU_CODENAME=\K.*' /etc/os-release
+    register: distro
+    changed_when: False
+  - name: "Linux Mint: Set release for apt repository"
+    set_fact:
+      debian_ubuntu_release: "{{ distro.stdout }}"
+  when: not ansible_check_mode and ansible_distribution == "Linux Mint"
+
+- name: "Debian: Add Hashicorp's signing key"
+  become: "yes"
+  apt_key:
+    url: "{{ hashicorp_public_key }}"
+    state: "{{ hashicorp_public_key_state }}"
+
+- name: "Debian: Setup Hashicorp's apt repository"
+  become: "yes"
+  apt_repository:
+    repo: "deb [arch=amd64] https://apt.releases.hashicorp.com {{ debian_ubuntu_release }} main"
+    filename: hashicorp
+    state: present
+    mode: 0644
+
+- name: "Installing vagrant packages"
+  become: "yes"
+  package:
+    name: "{{ vagrant_packages }}"
+    state: "{{ vagrant_packages_state }}"

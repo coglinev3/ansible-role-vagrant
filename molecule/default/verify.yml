@@ -1,0 +1,18 @@
+---
+# This is an example playbook to execute Ansible tests.
+
+- name: Verify
+  hosts: all
+  tasks:
+    - name: "Log in as user ansible and execute vagrant --version"
+      shell: vagrant --version
+      changed_when: false
+      args:
+        warn: false # set warn=false to prevent warning
+      register: vagrant_version
+    - name: Check Vagrant version
+      assert:
+        that:
+          - "'2.' in vagrant_version.stdout"
+        fail_msg: "Vagrant is not installed correctly"
+        success_msg: "{{ vagrant_version.stdout }} installed correctly"

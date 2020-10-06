@@ -1,0 +1,22 @@
+---
+# file: roles/vagrant/defaults/main.yml
+
+
+# variables for Hashicorps's signing key
+hashicorp_public_key: "https://apt.releases.hashicorp.com/gpg"
+hashicorp_public_key_state: present
+
+# define vagrant packages
+vagrant_packages:
+  - vagrant
+#  - vagrant-hostmanager
+#  - vagrant-sshfs
+#  - vagrant-libvirt
+#  - vagrant-mutate
+#  - nfs-kernel-server
+
+vagrant_packages_state: present
+
+# define dependencies for vagrant
+vagrant_dependencies:
+  - apt-transport-https

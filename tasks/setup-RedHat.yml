@@ -1,0 +1,35 @@
+---
+# file: roles/vagrant/tasks/setup-RedHat.yml
+- name: "RedHat: Add Hashicorps's signing key"
+  become: "yes"
+  rpm_key:
+    key: "{{ hashicorp_public_key }}"
+    state: "{{ hashicorp_public_key_state }}"
+
+- name: "RedHat: Add Hashicorp's repository"
+  become: "yes"
+  yum_repository:
+    name: HashiCorp
+    description: HashiCorp YUM repo
+    baseurl: https://rpm.releases.hashicorp.com/RHEL/$releasever/$basearch/stable
+    enabled: "yes"
+    gpgcheck: "yes"
+    mode: 0644
+  when: not ansible_distribution == "Fedora"
+
+- name: "Fedora: Add Hashicorp's repository"
+  become: "yes"
+  yum_repository:
+    name: HashiCorp
+    description: HashiCorp YUM repo
+    baseurl: https://rpm.releases.hashicorp.com/fedora/$releasever/$basearch/stable
+    enabled: "yes"
+    gpgcheck: "yes"
+    mode: 0644
+  when: ansible_distribution == "Fedora"
+
+- name: "Installing vagrant packages"
+  become: "yes"
+  package:
+    name: "{{ vagrant_packages }}"
+    state: "{{ vagrant_packages_state }}"
