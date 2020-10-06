@@ -7,7 +7,6 @@ This Ansible role installs HashiCorp Vagrant on these supported Linux distributi
 * Debian 8 (Jessie),
 * Debian 9 (Stretch),
 * Debian 10 (Buster),
-* Enterprise Linux 6, 
 * Enterprise Linux 7, 
 * Enterprise Linux 8, 
 * Fedora 31,

@@ -5,12 +5,12 @@ driver:
   name: docker
 platforms:
   - name: instance
-    image: docker.io/${MOLECULE_DISTRO:-coglinev3/ansible}:${MOLECULE_DISTRO_VERSION:-debian-10}
+    image: docker.io/${MOLECULE_DISTRO:-coglinev3/ansible}:${MOLECULE_DISTRO_VERSION:-centos-8}
     pre_build_image: true
     volumes:
       - '/sys/fs/cgroup:/sys/fs/cgroup:ro'
     privileged: true
-    command: ${MOLECULE_DISTRO_CMD:-/bin/systemd}
+    command: ${MOLECULE_DISTRO_CMD:-/usr/sbin/init}
 provisioner:
   name: ansible
   inventory:

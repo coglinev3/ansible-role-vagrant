@@ -22,8 +22,6 @@ env:
     - MOLECULE_DISTRO: coglinev3/ansible
     - PATH: /home/travis/.local/bin:${PATH}
   matrix:
-    - MOLECULE_DISTRO_VERSION: centos-6
-      MOLECULE_DISTRO_CMD: /sbin/init
     - MOLECULE_DISTRO_VERSION: centos-7
     - MOLECULE_DISTRO_VERSION: centos-8
     - MOLECULE_DISTRO_VERSION: fedora-31
