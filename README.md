@@ -10,6 +10,7 @@ This Ansible role installs HashiCorp [Vagrant](https://www.vagrantup.com/intro "
 * Enterprise Linux 7, 
 * Enterprise Linux 8, 
 * Fedora 32,
+* Fedora 33,
 * Linux Mint 20 Ulyana,
 * Ubuntu 16.04 LTS (Xenial Xerus),
 * Ubuntu 18.04 LTS (Bionic Beaver),
