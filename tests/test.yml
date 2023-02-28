@@ -1,6 +1,7 @@
 ---
 # file: roles/vagrant/tests/test.yml
 
-- hosts: local
+- name: Execute role coglinev3.vagrant
+  hosts: local
   roles:
     - "coglinev3.vagrant"
