@@ -5,6 +5,8 @@
   hosts: all
   tasks:
     - name: "Log in as user ansible and execute vagrant --version"
+      become: true
+      become_user: ansible
       ansible.builtin.command: vagrant --version
       changed_when: false
       register: vagrant_version
