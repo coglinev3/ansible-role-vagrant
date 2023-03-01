@@ -69,7 +69,7 @@ None
 
 ## Version
 
-Release: 1.0.2
+Release: 1.1.0
 
 
 ## License
@@ -79,4 +79,4 @@ BSD
 
 ## Author Information
 
-Copyright &copy; 2020 Cogline.v3.
+Copyright &copy; 2023 Cogline.v3.
