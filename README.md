@@ -1,12 +1,12 @@
 # Ansible Role: vagrant
 
-[![Build Status](https://travis-ci.com/coglinev3/ansible-role-vagrant.svg?branch=master)](https://travis-ci.com/coglinev3/ansible-role-vagrant) ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/coglinev3/ansible-role-vagrant) [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://raw.githubusercontent.com/coglinev3/ansible-role-vagrant/master/LICENSE)
+[![Build](https://github.com/coglinev3/ansible-role-vagrant/actions/workflows/build.yml/badge.svg)](https://github.com/coglinev3/ansible-role-vagrant/actions/workflows/build.yml) ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/coglinev3/ansible-role-vagrant) [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://raw.githubusercontent.com/coglinev3/ansible-role-vagrant/master/LICENSE)
 
 This Ansible role installs HashiCorp [Vagrant](https://www.vagrantup.com/intro "Introduction to Vagrant") on these supported Linux distributions:
 
-* Debian 8 (Jessie),
 * Debian 9 (Stretch),
 * Debian 10 (Buster),
+* Debian 11 (Bullseye),
 * Enterprise Linux 7, 
 * Enterprise Linux 8, 
 * Enterprise Linux 9, 
@@ -14,12 +14,11 @@ This Ansible role installs HashiCorp [Vagrant](https://www.vagrantup.com/intro "
 * Fedora 35,
 * Fedora 36,
 * Fedora 37,
-* Linux Mint 20 Ulyana,
-* Ubuntu 16.04 LTS (Xenial Xerus),
 * Ubuntu 18.04 LTS (Bionic Beaver),
 * Ubuntu 20.04 LTS (Focal Fossa),
+* Ubuntu 22.04 LTS (Jammy Jellyfish).
 
-This Role was tested with [Travis CI](https://travis-ci.com/coglinev3/ansible-role-vagrant "Travis CI") using [Docker](https://www.docker.com/ "Docker") and  with a [multi virtual machine Vagrant environment](https://ansible-development.readthedocs.io "Environment for developing and testing Ansible roles").
+The role was tested with [Ansible Molecule](https://molecule.readthedocs.io/en/latest/ "Ansible Molecule") and [Docker](https://www.docker.com/ "Docker").
 
 ## Requirements
 

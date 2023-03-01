@@ -16,14 +16,14 @@ galaxy_info:
         - "7"
     - name: Ubuntu
       versions:
-        - xenial
         - bionic
         - focal
+        - jammy
     - name: Debian
       versions:
-        - jessie
         - stretch
         - buster
+        - bullseye
     - name: Fedora
       versions:
         - "34"
