@@ -1,5 +1,13 @@
 ---
 # file: roles/vagrant/tasks/setup-RedHat.yml
+
+- name: "RedHat: Install dependencies"
+  become: true
+  ansible.builtin.dnf:
+    name: "{{ vagrant_dependencies }}"
+    state: present
+    update_cache: true
+
 - name: "RedHat: Add Hashicorps's signing key"
   become: true
   ansible.builtin.rpm_key:
@@ -10,23 +18,23 @@
   become: true
   ansible.builtin.yum_repository:
     name: HashiCorp
-    description: HashiCorp YUM repo
+    description: HashiCorp Stable - $basearch
     baseurl: https://rpm.releases.hashicorp.com/RHEL/$releasever/$basearch/stable
     enabled: true
     gpgcheck: true
     mode: "0644"
-  when: not ansible_distribution == "Fedora"
+  when: not ansible_facts.distribution == "Fedora"
 
 - name: "Fedora: Add Hashicorp's repository"
   become: true
   ansible.builtin.yum_repository:
     name: HashiCorp
-    description: HashiCorp YUM repo
+    description: HashiCorp Stable - $basearch
     baseurl: https://rpm.releases.hashicorp.com/fedora/$releasever/$basearch/stable
     enabled: true
     gpgcheck: true
     mode: "0644"
-  when: ansible_distribution == "Fedora"
+  when: ansible_facts.distribution == "Fedora"
 
 - name: "Installing vagrant packages"
   become: true

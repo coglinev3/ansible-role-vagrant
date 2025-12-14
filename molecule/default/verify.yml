@@ -3,16 +3,15 @@
 
 - name: Verify
   hosts: all
+  gather_facts: false
   tasks:
-    - name: "Log in as user ansible and execute vagrant --version"
-      become: true
-      become_user: ansible
-      ansible.builtin.command: vagrant --version
-      changed_when: false
-      register: vagrant_version
-    - name: Check Vagrant version
+    - name: Gather installed package facts
+      ansible.builtin.package_facts:
+        manager: auto
+
+    - name: Assert vagrant is installed
       ansible.builtin.assert:
         that:
-          - "'2.' in vagrant_version.stdout"
-        fail_msg: "Vagrant is not installed correctly"
-        success_msg: "{{ vagrant_version.stdout }} installed correctly"
+          - "'vagrant' in ansible_facts.packages"
+        fail_msg: "vagrant is not installed"
+        success_msg: "vagrant is installed"

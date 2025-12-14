@@ -1,0 +1,6 @@
+---
+# file: roles/vagrant/vars/RedHat.yml
+
+# define dependencies for vagrant
+vagrant_dependencies:
+  - yum-utils
