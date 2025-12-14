@@ -15,7 +15,6 @@ platforms:
       - /run/lock
     cgroupns_mode: host
     privileged: true
-    command: ${MOLECULE_DISTRO_CMD:-/usr/sbin/init}
 provisioner:
   name: ansible
   inventory:
