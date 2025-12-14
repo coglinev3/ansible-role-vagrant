@@ -10,11 +10,11 @@
 
 - name: "Debian: Set release for apt repository"
   ansible.builtin.set_fact:
-    debian_ubuntu_release: "{{ ansible_distribution_release }}"
-  when: ansible_distribution != "Linux Mint"
+    debian_ubuntu_release: "{{ ansible_facts.distribution_release }}"
+  when: ansible_facts.distribution != "Linux Mint"
 
 - name: Get release for Linux Mint
-  when: not ansible_check_mode and ansible_distribution == "Linux Mint"
+  when: not ansible_check_mode and ansible_facts.distribution == "Linux Mint"
   block:
     - name: "Linux Mint: Get distribution release"
       ansible.builtin.command: grep -oP 'UBUNTU_CODENAME=\K.*' /etc/os-release

@@ -20,3 +20,4 @@ vagrant_packages_state: present
 # define dependencies for vagrant
 vagrant_dependencies:
   - apt-transport-https
+  - gpg
