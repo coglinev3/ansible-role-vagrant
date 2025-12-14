@@ -45,7 +45,9 @@ jobs:
           #   distro_cmd: /sbin/init
           - distro_version: 'almalinux-9'
           - distro_version: 'debian-11'
-          - distro_version: 'fedora-37'
+          - distro_version: 'fedora-40'
+          - distro_version: 'fedora-41'
+          - distro_version: 'fedora-42'
           - distro_version: 'ubuntu-22.04'
 
     steps:
