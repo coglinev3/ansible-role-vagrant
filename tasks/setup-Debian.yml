@@ -6,7 +6,7 @@
   ansible.builtin.apt:
     name: "{{ vagrant_dependencies }}"
     state: present
-    update_cache: "yes"
+    update_cache: true
 
 - name: "Debian: Set release for apt repository"
   ansible.builtin.set_fact:
@@ -24,22 +24,52 @@
       ansible.builtin.set_fact:
         debian_ubuntu_release: "{{ distro.stdout }}"
 
-- name: "Debian: Add Hashicorp's signing key"
-  become: true
-  ansible.builtin.apt_key:
-    url: "{{ hashicorp_public_key }}"
-    state: "{{ hashicorp_public_key_state }}"
+- name: "Debian: Get dpkg architecture"
+  ansible.builtin.command: dpkg --print-architecture
+  register: dpkg_arch
+  changed_when: false
+  check_mode: false
 
-- name: "Debian: Setup Hashicorp's apt repository"
+- name: "Debian 11: Add HashiCorp repo"
+  when: ansible_facts.distribution == "Ubuntu" or
+    (ansible_facts.distribution == "Debian" and
+    ansible_facts.distribution_major_version | int == 11)
+  block:
+    - name: "Debian: Add Hashicorp's signing key"
+      become: true
+      ansible.builtin.apt_key:
+        url: "{{ hashicorp_public_key }}"
+        state: "{{ hashicorp_public_key_state }}"
+    
+    - name: "Debian: Setup Hashicorp's apt repository"
+      become: true
+      ansible.builtin.apt_repository:
+        repo: "deb [arch={{ dpkg_arch.stdout }}] https://apt.releases.hashicorp.com {{ debian_ubuntu_release }} main"
+        filename: hashicorp
+        state: present
+        mode: "0644"
+        update_cache: false
+
+- name: "Debian >= 12: Setup Hashicorp's apt repository"
   become: true
-  ansible.builtin.apt_repository:
-    repo: "deb [arch=amd64] https://apt.releases.hashicorp.com {{ debian_ubuntu_release }} main"
-    filename: hashicorp
+  ansible.builtin.deb822_repository:
+    name: hashicorp
+    types: deb
+    uris: "https://apt.releases.hashicorp.com"
+    architectures: "{{ dpkg_arch.stdout }}"
+    suites: "{{ debian_ubuntu_release }}"
+    components: main
+    signed_by: "{{ hashicorp_public_key }}"
     state: present
-    mode: "0644"
+    enabled: true
+    install_python_debian: true
+  when:
+    - ansible_facts.distribution == "Debian"
+    - ansible_facts.distribution_major_version | int >= 12
 
 - name: "Installing vagrant packages"
   become: true
-  ansible.builtin.package:
+  ansible.builtin.apt:
     name: "{{ vagrant_packages }}"
     state: "{{ vagrant_packages_state }}"
+    update_cache: true
