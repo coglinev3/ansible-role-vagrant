@@ -4,18 +4,9 @@
 
 This Ansible role installs HashiCorp [Vagrant](https://www.vagrantup.com/intro "Introduction to Vagrant") on these supported Linux distributions:
 
-* Debian 9 (Stretch),
-* Debian 10 (Buster),
 * Debian 11 (Bullseye),
-* Enterprise Linux 7, 
-* Enterprise Linux 8, 
 * Enterprise Linux 9, 
-* Fedora 34,
-* Fedora 35,
-* Fedora 36,
 * Fedora 37,
-* Ubuntu 18.04 LTS (Bionic Beaver),
-* Ubuntu 20.04 LTS (Focal Fossa),
 * Ubuntu 22.04 LTS (Jammy Jellyfish).
 
 The role was tested with [Ansible Molecule](https://molecule.readthedocs.io/en/latest/ "Ansible Molecule") and [Docker](https://www.docker.com/ "Docker").
