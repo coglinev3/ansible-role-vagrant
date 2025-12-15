@@ -14,16 +14,17 @@
     key: "{{ hashicorp_public_key }}"
     state: "{{ hashicorp_public_key_state }}"
 
-- name: "RedHat: Add Hashicorp's repository"
+- name: "Amazon: Add Hashicorp's repository"
   become: true
   ansible.builtin.yum_repository:
     name: HashiCorp
     description: HashiCorp Stable - $basearch
-    baseurl: https://rpm.releases.hashicorp.com/RHEL/$releasever/$basearch/stable
+    baseurl: https://rpm.releases.hashicorp.com/AmazonLinux/latest/$basearch/stable
     enabled: true
     gpgcheck: true
     mode: "0644"
-  when: not ansible_facts.distribution == "Fedora"
+  when:
+    - ansible_facts.distribution == "Amazon"
 
 - name: "Fedora: Add Hashicorp's repository"
   become: true
@@ -34,7 +35,21 @@
     enabled: true
     gpgcheck: true
     mode: "0644"
-  when: ansible_facts.distribution == "Fedora"
+  when:
+    - ansible_facts.distribution == "Fedora"
+
+- name: "RedHat: Add Hashicorp's repository"
+  become: true
+  ansible.builtin.yum_repository:
+    name: HashiCorp
+    description: HashiCorp Stable - $basearch
+    baseurl: https://rpm.releases.hashicorp.com/RHEL/$releasever/$basearch/stable
+    enabled: true
+    gpgcheck: true
+    mode: "0644"
+  when:
+    - not ansible_facts.distribution == "Amazon"
+    - not ansible_facts.distribution == "Fedora"
 
 - name: "Installing vagrant packages"
   become: true
