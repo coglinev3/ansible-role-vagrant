@@ -3,4 +3,5 @@
 
 # define dependencies for vagrant
 vagrant_dependencies:
+  - gpg
   - yum-utils
