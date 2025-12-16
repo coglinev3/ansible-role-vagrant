@@ -40,7 +40,7 @@
       ansible.builtin.apt_key:
         url: "{{ hashicorp_public_key }}"
         state: "{{ hashicorp_public_key_state }}"
-    
+
     - name: "Debian: Setup Hashicorp's apt repository"
       become: true
       ansible.builtin.apt_repository:
