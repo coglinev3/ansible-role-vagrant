@@ -14,15 +14,4 @@
         that:
           - "'vagrant' in ansible_facts.packages"
         fail_msg: "vagrant is not installed"
-        success_msg: "vagrant is installed"
-
-    - name: "Get vagrant version"
-      become: true
-      become_user: ansible
-      ansible.builtin.command: vagrant --version
-      changed_when: false
-      register: vagrant_version
-
-    - name: "Show vagrant version"
-      ansible.builtin.debug:
-        msg: "{{ vagrant_version.stdout }}"
+        success_msg: "vagrant {{ ansible_facts.packages['vagrant'][0].version }} is installed"
