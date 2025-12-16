@@ -39,13 +39,13 @@ vagrant_packages:
 #  - vagrant-sshfs
 #  - vagrant-libvirt
 #  - vagrant-mutate
-#  - nfs-kernel-server
 
 vagrant_packages_state: present
 
 # define dependencies for vagrant
 vagrant_dependencies:
   - apt-transport-https
+  - gpg
 ```
 
 ## Dependencies
@@ -66,7 +66,7 @@ None
 
 ## Version
 
-Release: 1.1.0
+Release: 1.2.0
 
 
 ## License
